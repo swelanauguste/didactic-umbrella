@@ -1,0 +1,4 @@
+-r production.txt
+
+black==22.1.0
+Faker==13.3.2
