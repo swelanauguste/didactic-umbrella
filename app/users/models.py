@@ -13,6 +13,13 @@ class User(AbstractUser):
     is_customer = models.BooleanField(default=True)
 
 
+class Agency(models.Model):
+    agency_name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.agency_name
+
+
 class UserProfile(models.Model):
     GENDER_LIST = [
         ("M", "M"),
@@ -22,11 +29,14 @@ class UserProfile(models.Model):
     uid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     first_name = models.CharField(max_length=65, blank=True)
     last_name = models.CharField(max_length=65, blank=True)
+    agency = models.ForeignKey(
+        Agency, on_delete=models.CASCADE, related_name="agencies", null=True, blank=True
+    )
     slug = models.SlugField(max_length=65, blank=True)
     gender = models.CharField(max_length=1, choices=GENDER_LIST)
-    dob = models.DateField(blank=True, null=True)
+    dob = models.DateField("DOB", blank=True, null=True)
     bio = models.TextField(blank=True)
-    phone = models.CharField(max_length=25, blank=True)
+    phone = models.CharField(max_length=25, blank=True, default="+ 1758")
 
     def save(self, *args, **kwargs):
         if not self.slug:

@@ -1,17 +1,9 @@
 import uuid
 
+from django.conf import settings
 from django.db import models
 
-from django.conf import settings
-
 User = settings.AUTH_USER_MODEL
-
-
-class Agency(models.Model):
-    agency_name = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.agency_name
 
 
 class TicketStatus(models.Model):
@@ -28,4 +20,9 @@ class Ticket(models.Model):
     )
     ticket_title = models.CharField(max_length=100)
     ticket_detail = models.TimeField(blank=True, null=True)
-    # customer = model.For
+    customer = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="customers", null=True, blank=True
+    )
+
+    def __str__(self):
+        return self.ticket_title
