@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block blockname %}
+
+{% endblock blockname %}
+
+
+{% block content %}
+<div class="container my-5">
+    <div class="col-lg-4 mx-auto">
+        <h2 class="text-center">Form</h2>
+        <div class="border shadow" style="border-radius: 1rem;">
+            <div class="card-body mt-3">
+                <form action=""
+                    method="post">
+                    {% csrf_token %}
+                    {{form|crispy}}
+                    <div class="text-end">
+                        <button class="btn btn-sm btn-outline-dark px-5 mt-3"
+                            type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

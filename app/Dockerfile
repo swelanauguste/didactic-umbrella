@@ -1,5 +1,5 @@
 # pull official base image
-FROM python:3.9.6-alpine
+FROM python:buster
 
 # set work directory
 WORKDIR /usr/src/app
@@ -12,8 +12,7 @@ ENV PYTHONUNBUFFERED 1
 RUN pip install --upgrade pip
 RUN apt-get update
 COPY ./requirements/production.txt .
-COPY ./requirements/development.txt .
-RUN pip install -r development.txt
+RUN pip install -r production.txt
 
 # copy project
 COPY . .

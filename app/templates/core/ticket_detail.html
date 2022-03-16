@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+
+{% block head_title %}
+{{object.pk}}
+{% endblock head_title %}
+
+
+
+{% block content %}
+<div class="vh-100">
+    <div class="my-5 container">
+        <a href="/">back</a>
+    </div>
+    <div class="col-lg-4 mx-auto">
+        <h2 class="text-end">#{{object.pk}}</h2>
+        <div class="card">
+            <div class="card-header">{{object.ticket_status}}</div>
+            <div class="card-body">
+                <p>{{object.category|upper}}</p>
+                <p>{{object.ticket_title}}</p>
+                <p>{{object.ticket_detail}}</p>
+                <p>{{object.created_by}}</p>
+            </div>
+        </div>
+        <div class="container small">
+            <br>
+            {% for comment in object.comments.all %}
+            {{comment}}
+            <p class="small text-muted text-end">{{comment.created_by}}</p>
+            <hr>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

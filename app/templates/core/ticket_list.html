@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block head_title %}
+List
+{% endblock head_title %}
+
+{% block content %}
+<div class="mx-5 vh-100">
+    <div class="row">
+        <div class="col">
+            <div class="">
+                <div class="row">
+                    <div class="col">
+                        <div class="h1">Ticket</div>
+                    </div>
+                    <div class="col">
+                        <a class="text-decoration-none text-dark d-flex justify-content-end"
+                            href="{% url 'core:create' %}">
+                            <i title="add ticket"
+                                class="bi bi-plus-circle-fill fs-3"></i>
+                        </a>
+                    </div>
+                </div>
+                <br>
+                <div class="border p-5 shadow"
+                    style="border-radius: 1rem ;">
+                    <table class="table table-sm table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">ticket</th>
+                                <th scope="col">category</th>
+                                <th scope="col">status</th>
+                                <th scope="col">created by</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for ticket in object_list %}
+                            <tr>
+                                <th scope="row">{{ forloop.counter }} </th>
+                                <td>
+                                    <a class="text-decoration-none text-dark"
+                                        href="{{ ticket.get_absolute_url }}">{{ticket.ticket_title}}</a>
+                                </td>
+                                <td>{{ticket.category}}</td>
+                                <td>{{ticket.ticket_status}}</td>
+                                <td>{{ticket.created_by}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2">
+            {% include 'core/zone_list.html' %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

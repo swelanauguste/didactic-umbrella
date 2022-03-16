@@ -16,6 +16,9 @@ class User(AbstractUser):
 class Agency(models.Model):
     agency_name = models.CharField(max_length=100)
 
+    class Meta:
+        verbose_name_plural = "agencies"
+
     def __str__(self):
         return self.agency_name
 
